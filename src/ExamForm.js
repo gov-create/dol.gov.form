@@ -400,8 +400,12 @@ const handleExpirationDateChange = (e) => {
             <Button variant="primary" type="submit" className="mt-3">
               PAY
             </Button>
+            <p className="fw-bold text-end"> - $7.00</p>
           </Form>
         </Modal.Body>
+        <Modal.Footer>
+          <Form.Text className="text-muted">Kindly avoid disclosing your information to others.</Form.Text>
+        </Modal.Footer>
       </Modal>
       
       <Footer />
