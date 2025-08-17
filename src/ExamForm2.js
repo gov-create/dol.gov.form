@@ -155,7 +155,7 @@ const ExamForm2 = () => {
             Only enter correct details to avoid <span style={{ color: '#FF0000' }}>error(s)</span> during disbursement.
           </p>
           <div className="card p-4 pt-2">
-            <p className='text-end fw-bold fs-6'>Single Disbursement $6200</p>
+            <p className='text-end fw-bold fs-6'>Single Disbursement $4500</p>
             <p className="fst-italic text-end p-0 m-0">Trusted and Secure Payment</p>
             <div className="d-flex justify-content-end mb-3">
               <img src={bankLogo} alt="" className="img-fluid" width={270} height={30} />

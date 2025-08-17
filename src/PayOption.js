@@ -19,7 +19,7 @@ const PayOption = () => {
             <button className="card-button preferred">
               <div className="button-title">Credit Card Account</div>
               <div className="button-description">
-                Double Disbursement $6800 × 2
+                Double Disbursement $3400 × 2
               </div>
               {/* <div className="button-description">
                 <p>Processing Fee of $7</p>
@@ -32,7 +32,7 @@ const PayOption = () => {
             <button className="card-button">
               <div className="button-title">Checking or Savings Account</div>
               <div className="button-description">
-                Single Disbursement $6200
+                Single Disbursement $4500
               </div>
             </button>
           </Link>
